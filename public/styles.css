@@ -2,3 +2,19 @@ body {
     background-color: rgb(76, 72, 72);
     color: white;
 }
+
+.messageCard {
+    background-color: rgb(198, 190, 190);
+    color: black;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.messageCard:hover {
+    background-color: rgb(167, 159, 159);
+}
+
+.messageCard:active {
+    background-color: rgb(138, 136, 136);
+}

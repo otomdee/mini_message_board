@@ -1,5 +1,9 @@
-<div>
-    <span> <%= item.user%></span>
+<div class="messageCard">
+    <span> <%= item.user%> :</span>
     <span> <%= item.text%></span>
     <span> <%= item.added%></span>
+    
+    <a href=<%= `/message/${item.user}` %>>
+        <button>Open Full Message</button>
+    </a>
 </div>

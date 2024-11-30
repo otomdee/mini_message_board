@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Board</title>
+    <title>Full Message</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <button>
-        <a href="/new">New Message</a>
-    </button>
-    <% messages.forEach((item) => { %>
-        <%- include("usercard", {item: item}) %>   
-        <% }); %>
+    <div class="fullCard">
+        <span> <%= item.user%> :</span>
+        <span> <%= item.text%></span>
+        <span> <%= item.added%></span>
+    </div>
 </body>
 </html>
