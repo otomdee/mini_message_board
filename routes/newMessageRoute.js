@@ -1,6 +1,15 @@
 const express = require("express");
 const { Router } = require("express");
-const { editMessages } = require("./indexRoute");
+const { insertMessage } = require("../db/queries");
+
+
+const formatDateISO = (date) => {
+  // Convert the date to ISO string
+  const isoString = date.toISOString();
+  // Split at the "T" character to get the date part
+  const formattedDate = isoString.split("T")[0];
+  return formattedDate;
+};
 
 const newMessageRouter = Router();
 newMessageRouter.use(express.urlencoded({ extended: true }));
@@ -10,13 +19,9 @@ newMessageRouter.get('/', (req, res) => {
 })
 
 newMessageRouter.post('/', (req, res) => {
-    newCard = {
-      text: req.body.message,
-      user: req.body.userName,
-      added: new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    }
+    const currentDate = formatDateISO(new Date());
 
-    editMessages(newCard);
+    insertMessage(req.body.message, req.body.userName, currentDate);
 
     res.redirect('/');
 })

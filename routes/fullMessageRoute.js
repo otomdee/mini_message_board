@@ -1,14 +1,17 @@
 const { Router } = require("express");
-const { messages } = require("./indexRoute");
 
 const fullMessageRouter = Router();
 
-fullMessageRouter.get("/:username", (req, res) => {
-    const { username } = req.params;
-    //find user object in messages
-    const fullObj = messages.find(item => (item.user === username));
+//add a local array to store messages instead of querying the db again.
+loadedMessages = [];
 
+fullMessageRouter.get("/:messageId", (req, res) => {
+    const { messageId } = req.params;
+    //find user in loaded messages
+    const fullObj = loadedMessages.find((item) => {
+        return (item.id == messageId); 
+    })
     res.render("fullCard", { item: fullObj });
 })
 
-module.exports = fullMessageRouter;
+module.exports = {fullMessageRouter, loadedMessages};

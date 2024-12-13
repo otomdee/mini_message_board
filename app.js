@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const { indexRouter } = require("./routes/indexRoute");
 const newMessageRouter = require("./routes/newMessageRoute");
-const fullMessageRouter = require("./routes/fullMessageRoute");
+const {fullMessageRouter} = require("./routes/fullMessageRoute");
 
 const app = express();
 

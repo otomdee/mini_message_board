@@ -1,27 +1,28 @@
 const { Router } = require("express");
-
+const { getAllMessages } = require("../db/queries");
+const { loadedMessages } = require("./fullMessageRoute");
 const indexRouter = Router();
 
-const messages = [
-    {
-      text: "Hi there!",
-      user: "Amando",
-      added: new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-    },
-    {
-      text: "Hello World!",
-      user: "Charles",
-      added: new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})
-    }
-  ];
-  
-function editMessages(newCard){
-  messages.push(newCard);
-  console.log(messages);
+async function indexController(req, res) {
+  const response = await getAllMessages();
+
+    const fullMessages = response.map((item) => {
+      
+      return ({
+        id: item.id,
+        text: item.message,
+        user: item.username,
+        added: (item.date).toISOString().slice(0, 10)
+      });
+    });
+
+    //load messages into loaded array
+    fullMessages.forEach((item) => {
+      loadedMessages.push(item);
+    })
+    res.render("index", { messages : fullMessages });
 }
 
-indexRouter.get('/', (req, res) => {
-    res.render("index", { messages : messages })
-})
+indexRouter.get('/', indexController);
 
-module.exports = {indexRouter, editMessages, messages};
+module.exports = {indexRouter};
