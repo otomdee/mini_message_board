@@ -1,7 +1,7 @@
 <div class="messageCard">
     <span> <%= item.user%> :</span>
     <span> <%= item.text%></span>
-    <span> <%= item.added%></span>
+    <span style="display: block;"> Date sent: <%= item.added%></span>
     
     <a href=<%= `/message/${item.id}` %>>
         <button>Open Full Message</button>

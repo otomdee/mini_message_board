@@ -4,6 +4,10 @@ const fullMessageRouter = Router();
 
 //add a local array to store messages instead of querying the db again.
 loadedMessages = [];
+//function to clear loadedMessages
+function clearLoaded() {
+    loadedMessages = [];
+}
 
 fullMessageRouter.get("/:messageId", (req, res) => {
     const { messageId } = req.params;
@@ -14,4 +18,4 @@ fullMessageRouter.get("/:messageId", (req, res) => {
     res.render("fullCard", { item: fullObj });
 })
 
-module.exports = {fullMessageRouter, loadedMessages};
+module.exports = {fullMessageRouter, loadedMessages, clearLoaded};

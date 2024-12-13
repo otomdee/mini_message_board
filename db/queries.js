@@ -6,7 +6,7 @@ const dbPool =  new Pool({
 })
 
 async function getAllMessages() {
-    const { rows } = await dbPool.query("SELECT * FROM messages;");
+    const { rows } = await dbPool.query("SELECT * FROM messages ORDER BY id;");
     return rows;
 }
 

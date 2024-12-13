@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { getAllMessages } = require("../db/queries");
-const { loadedMessages } = require("./fullMessageRoute");
+const { loadedMessages, clearLoaded } = require("./fullMessageRoute");
 const indexRouter = Router();
 
 async function indexController(req, res) {
@@ -17,6 +17,7 @@ async function indexController(req, res) {
     });
 
     //load messages into loaded array
+    clearLoaded();
     fullMessages.forEach((item) => {
       loadedMessages.push(item);
     })
